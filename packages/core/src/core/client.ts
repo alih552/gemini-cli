@@ -785,10 +785,7 @@ export class GeminiClient {
         } else if ('additionalContext' in hookResult) {
           const additionalContext = hookResult.additionalContext;
           if (additionalContext) {
-            const sanitizedContext = additionalContext.replace(
-              /<\/hook_context>/g,
-              '<\\/hook_context>',
-            );
+            const sanitizedContext = additionalContext.replace(/</g, '&lt;');
             const requestArray = Array.isArray(request) ? request : [request];
             request = [
               ...requestArray,

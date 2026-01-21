@@ -364,10 +364,7 @@ export async function executeToolWithHooks(
     // Add additional context from hooks to the tool result
     const additionalContext = afterOutput?.getAdditionalContext();
     if (additionalContext) {
-      const sanitizedContext = additionalContext.replace(
-        /<\/hook_context>/g,
-        '<\\/hook_context>',
-      );
+      const sanitizedContext = additionalContext.replace(/</g, '&lt;');
       const wrappedContext = `\n\n<hook_context>${sanitizedContext}</hook_context>`;
       if (typeof toolResult.llmContent === 'string') {
         toolResult.llmContent += wrappedContext;

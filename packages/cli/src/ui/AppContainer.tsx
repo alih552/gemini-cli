@@ -314,10 +314,7 @@ export const AppContainer = (props: AppContainerProps) => {
         const additionalContext = result.getAdditionalContext();
         const geminiClient = config.getGeminiClient();
         if (additionalContext && geminiClient) {
-          const sanitizedContext = additionalContext.replace(
-            /<\/hook_context>/g,
-            '<\\/hook_context>',
-          );
+          const sanitizedContext = additionalContext.replace(/</g, '&lt;');
           await geminiClient.addHistory({
             role: 'user',
             parts: [
